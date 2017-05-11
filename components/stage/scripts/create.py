@@ -84,6 +84,7 @@ def _create_tables():
 
 def main():
     _install_stage()
+    print 'ctx.instance.runtime_properties['skip_installation']={0}'.format(ctx.instance.runtime_properties['skip_installation'])
     if ctx.instance.runtime_properties['skip_installation'] != "true":
         _create_tables()
 
