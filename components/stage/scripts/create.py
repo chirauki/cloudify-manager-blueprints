@@ -72,22 +72,16 @@ def _install_stage():
 
     utils.logrotate(SERVICE_NAME)
     utils.systemd.configure(SERVICE_NAME)
-
-
-def _create_tables():
+    
     backend_dir = join(HOME_DIR, 'backend')
     npm_path = join(NODEJS_DIR, 'bin', 'npm')
     subprocess.check_call(
         'cd {0}; {1} run db-migrate'.format(backend_dir, npm_path),
         shell=True)
 
-
+    
 def main():
     _install_stage()
-    skip_installation = ctx.instance.runtime_properties['skip_installation']
-    print "ctx.instance.runtime_properties['skip_installation']={0}".format(skip_installation)
-    if skip_installation != "true":
-        _create_tables()
-
+    
 
 main()
